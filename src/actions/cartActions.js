@@ -1,4 +1,4 @@
-import { INCREASE_QUANTITY, DECREASE_QUANTITY, DELETE_ITEM, ADD_TO_CART } from "../actionTypes/cartActionTypes";
+import { INCREASE_QUANTITY, DECREASE_QUANTITY, DELETE_ITEM, ADD_TO_CART, SELECT_COMPANY } from "../actionTypes/cartActionTypes";
 
 export const increaseQuantity = (id) => {
   return {
@@ -25,5 +25,12 @@ export const addToCart = (item) => {
   return {
     type: ADD_TO_CART,
     payload: { item },
+  };
+};
+
+export const selectCompany = (id) => {
+  return {
+    type: SELECT_COMPANY,
+    payload: { id },
   };
 };

@@ -24,7 +24,8 @@ export const PizzaList = styled.ul`
       font-size: 16px;
       line-height: 20px;
       color: #fff;
-      margin-top: 5px;
+      margin: 5px 0px;
+      text-align: center;
     }
 
     > div {
@@ -130,6 +131,22 @@ export const Button = styled.a.attrs(() => ({}))`
     span {
       margin-left: 35px;
     }
+  }
+`;
+
+export const Select = styled.select`
+  display: flex;
+  margin: 0 auto 20px;
+  padding: 5px 0;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+`;
+
+export const ShowOffers = styled.div`
+  h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
   }
 `;
 

@@ -1,9 +1,10 @@
-import { INCREASE_QUANTITY, DECREASE_QUANTITY, DELETE_ITEM, ADD_TO_CART } from "../actionTypes/cartActionTypes";
+import { INCREASE_QUANTITY, DECREASE_QUANTITY, DELETE_ITEM, ADD_TO_CART, SELECT_COMPANY } from "../actionTypes/cartActionTypes";
 import { pizzas } from "../utils/helpers";
 
 const initState = {
   items: pizzas,
   cart: [],
+  selectedCompanyId: "0",
 };
 
 const cartReducer = (state = initState, action) => {
@@ -62,6 +63,15 @@ const cartReducer = (state = initState, action) => {
         ...state,
         cart: updatedCart,
         items: updatedItems,
+      };
+    }
+
+    case SELECT_COMPANY: {
+      const { payload } = action;
+      const { id } = payload;
+      return {
+        ...state,
+        selectedCompanyId: id,
       };
     }
 

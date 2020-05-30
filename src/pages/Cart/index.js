@@ -5,7 +5,7 @@ import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from "react-icons
 import { Link } from "react-router-dom";
 import { deleteItem, increaseQuantity, decreaseQuantity } from "../../actions/cartActions";
 import { Container, PizzaTable, Total, Text, EmptyText } from "./styles";
-import { formatPrice, convertTitle } from "../../utils/helpers";
+import { formatPrice, convertTitle, calculateCartValue } from "../../utils/helpers";
 
 const Cart = (props) => {
   const { cart, increaseQuantity: increaseQuantityAction, decreaseQuantity: decreaseQuantityAction, deleteItem: deleteItemAction, totalCost } = props;
@@ -46,7 +46,7 @@ const Cart = (props) => {
             </thead>
             <tbody>
               {cart.map((item) => {
-                const { title, price, quantity, url, id } = item;
+                const { title, price, quantity, url, id, subtotal } = item;
                 return (
                   <tr key={id}>
                     <td>
@@ -72,7 +72,7 @@ const Cart = (props) => {
                       </div>
                     </td>
                     <td>
-                      <strong>{formatPrice(price * quantity)}</strong>
+                      <strong>{formatPrice(subtotal)}</strong>
                     </td>
                     <td>
                       <button type="button" onClick={() => onDeleteClick(id)}>
@@ -104,9 +104,9 @@ Cart.propTypes = {
 
 const mapStateToProps = (state) => {
   const { cartReducer } = state;
-  const { cart } = cartReducer;
-  const totalCost = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  return { cart, totalCost };
+  const { cart, selectedCompanyId } = cartReducer;
+  const totalCost = calculateCartValue(selectedCompanyId, cart);
+  return { cart, totalCost, selectedCompanyId };
 };
 
 export default connect(mapStateToProps, { deleteItem, increaseQuantity, decreaseQuantity })(Cart);
